@@ -1,22 +1,21 @@
 # frozen_string_literal: true
 
+require 'forwardable'
+
 module Shipper
   class Base
-    attr_reader :length, :width, :height, :weight
+    extend Forwardable
 
-    def initialize(length, width, height, weight)
-      @length = length
-      @width = width
-      @height = height
-      @weight = weight
+    delegate %i[length width height weight size] => :product
+
+    attr_reader :product
+
+    def initialize(product)
+      @product = product
     end
 
     def shipping_fee
       0
-    end
-
-    def size
-      @size ||= length * width * height
     end
   end
 

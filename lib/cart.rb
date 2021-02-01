@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require_relative './shipper'
+require_relative './product'
 
 class Cart
-  def shipping_fee(shipper, length, width, height, weight)
+  def shipping_fee(shipper, product)
     Shipper[shipper]
-      .new(length, width, height, weight)
+      .new(product)
       .shipping_fee
   end
 end
